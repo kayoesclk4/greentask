@@ -33,6 +33,37 @@
   --danger-600: #dc2626;
   --danger-700: #b91c1c;
 
+  /* Semantic Theme Tokens - Light */
+  --bg-app: #f8fafc;
+  --bg-gradient: 
+    radial-gradient(circle at 10% 15%, rgba(167, 243, 208, 0.35) 0%, transparent 40%),
+    radial-gradient(circle at 90% 85%, rgba(110, 231, 183, 0.25) 0%, transparent 45%),
+    linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 50%, #f4fbf7 100%);
+  --bg-header: rgba(255, 255, 255, 0.82);
+  --border-header: rgba(255, 255, 255, 0.85);
+  --header-shadow: 0 10px 30px -5px rgba(22, 101, 52, 0.1), 0 4px 12px rgba(0, 0, 0, 0.04);
+  --bg-card: rgba(255, 255, 255, 0.9);
+  --border-card: rgba(255, 255, 255, 0.85);
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --text-sub: #475569;
+  --input-bg: #ffffff;
+  --input-border: #cbd5e1;
+  --brand-color: #166534;
+
+  /* Material 3 Expressive Tokens - Light */
+  --m3-surface: #ffffff;
+  --m3-surface-container-low: #f8fafc;
+  --m3-surface-container: #f1f5f9;
+  --m3-surface-container-high: #e2e8f0;
+  --m3-surface-container-highest: #cbd5e1;
+  --m3-primary: #16a34a;
+  --m3-on-primary: #ffffff;
+  --m3-primary-container: #dcfce7;
+  --m3-on-primary-container: #14532d;
+  --m3-outline: #94a3b8;
+  --m3-outline-variant: #e2e8f0;
+
   /* Shadows */
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
@@ -54,6 +85,40 @@
   --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+[data-theme='dark'] {
+  --bg-app: #090e13;
+  --bg-gradient: 
+    radial-gradient(circle at 12% 15%, rgba(5, 150, 105, 0.22) 0%, transparent 45%),
+    radial-gradient(circle at 88% 85%, rgba(16, 185, 129, 0.14) 0%, transparent 50%),
+    linear-gradient(135deg, #090e13 0%, #0d151c 50%, #0a1117 100%);
+  --bg-header: rgba(13, 20, 28, 0.85);
+  --border-header: rgba(255, 255, 255, 0.12);
+  --header-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(16, 185, 129, 0.08);
+  --bg-card: rgba(18, 28, 38, 0.88);
+  --border-card: rgba(255, 255, 255, 0.1);
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-sub: #cbd5e1;
+  --input-bg: rgba(15, 23, 32, 0.8);
+  --input-border: #334155;
+  --brand-color: #4ade80;
+
+  /* Material 3 Expressive Tokens - Dark */
+  --m3-surface: #090e13;
+  --m3-surface-container-low: #0f1722;
+  --m3-surface-container: #15202b;
+  --m3-surface-container-high: #1e293b;
+  --m3-surface-container-highest: #334155;
+  --m3-primary: #34d399;
+  --m3-on-primary: #022c22;
+  --m3-primary-container: rgba(16, 185, 129, 0.22);
+  --m3-on-primary-container: #86efac;
+  --m3-outline: #64748b;
+  --m3-outline-variant: rgba(255, 255, 255, 0.1);
+
+  color-scheme: dark;
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -64,11 +129,12 @@ html, body {
   min-height: 100%;
   width: 100%;
   font-family: var(--font-sans);
-  background-color: var(--slate-50);
-  color: var(--slate-800);
+  background-color: var(--bg-app);
+  color: var(--text-main);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 body {
