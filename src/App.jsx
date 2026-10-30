@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { supabase } from './lib/supabase'
 import Login from './components/Login'
+import LandingPage from './components/LandingPage'
 import TaskList from './components/TaskList'
 import CadastrarFuncionario from './components/CadastrarFuncionario'
 import GerenciarSetores from './components/GerenciarSetores'
@@ -9,6 +10,7 @@ import './App.css'
 function App() {
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [authView, setAuthView] = useState('landing') // 'landing' | 'login'
   const [tela, setTela] = useState('tarefas') // tarefas | funcionarios | setores
 
   useEffect(() => {
@@ -27,6 +29,7 @@ function App() {
   const handleLogout = async () => {
     await supabase.auth.signOut()
     setUser(null)
+    setAuthView('landing')
   }
 
   const isOwner = user?.email === 'ricardo.mazon@escola.pr.gov.br' ||
@@ -34,114 +37,79 @@ function App() {
 
   if (loading) {
     return (
-      <div style={{
-        minHeight: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        background: '#e8f5e9',
-        fontFamily: 'Arial, sans-serif',
-        color: '#2e7d32',
-        fontSize: '18px'
-      }}>
-        Carregando...
+      <div className="app-loading-screen">
+        <div className="app-loading-spinner" />
+        <span>Carregando GreenTask...</span>
       </div>
     )
   }
 
+  // Visitante não autenticado: Landing Page ou Login
   if (!user) {
-    return <Login onLogin={setUser} />
+    if (authView === 'login') {
+      return (
+        <Login
+          onLogin={setUser}
+          onBack={() => setAuthView('landing')}
+        />
+      )
+    }
+
+    return (
+      <LandingPage
+        onGoToLogin={() => setAuthView('login')}
+      />
+    )
   }
 
+  // Usuário autenticado
   return (
-    <div style={{
-      minHeight: '100vh',
-      background: '#f5f5f5',
-      fontFamily: 'Arial, sans-serif'
-    }}>
-      {/* Header */}
-      <header style={{
-        background: '#2e7d32',
-        color: 'white',
-        padding: '16px 24px',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-        flexWrap: 'wrap',
-        gap: '12px'
-      }}>
-        <h1 style={{ margin: 0, fontSize: '22px' }}>Green Task</h1>
+    <div className="app-layout">
+      {/* Header Limpo */}
+      <header className="app-header">
+        <div className="app-brand" onClick={() => setTela('tarefas')}>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#16a34a" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
+            <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" />
+          </svg>
+          <span className="app-brand-title">GreenTask</span>
+        </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
-          {isOwner && (
-            <>
-              <button
-                onClick={() => setTela('tarefas')}
-                style={{
-                  background: tela === 'tarefas' ? 'rgba(255,255,255,0.3)' : 'rgba(255,255,255,0.15)',
-                  border: 'none',
-                  color: 'white',
-                  padding: '8px 14px',
-                  borderRadius: '6px',
-                  cursor: 'pointer',
-                  fontSize: '13px'
-                }}
-              >
-                Tarefas
-              </button>
-              <button
-                onClick={() => setTela('funcionarios')}
-                style={{
-                  background: tela === 'funcionarios' ? 'rgba(255,255,255,0.3)' : 'rgba(255,255,255,0.15)',
-                  border: 'none',
-                  color: 'white',
-                  padding: '8px 14px',
-                  borderRadius: '6px',
-                  cursor: 'pointer',
-                  fontSize: '13px'
-                }}
-              >
-                Funcionários
-              </button>
-              <button
-                onClick={() => setTela('setores')}
-                style={{
-                  background: tela === 'setores' ? 'rgba(255,255,255,0.3)' : 'rgba(255,255,255,0.15)',
-                  border: 'none',
-                  color: 'white',
-                  padding: '8px 14px',
-                  borderRadius: '6px',
-                  cursor: 'pointer',
-                  fontSize: '13px'
-                }}
-              >
-                Setores
-              </button>
-            </>
-          )}
+        {/* Abas para Proprietário */}
+        {isOwner && (
+          <nav className="app-nav-tabs">
+            <button
+              onClick={() => setTela('tarefas')}
+              className={`app-nav-btn ${tela === 'tarefas' ? 'active' : ''}`}
+            >
+              Tarefas
+            </button>
+            <button
+              onClick={() => setTela('funcionarios')}
+              className={`app-nav-btn ${tela === 'funcionarios' ? 'active' : ''}`}
+            >
+              Funcionários
+            </button>
+            <button
+              onClick={() => setTela('setores')}
+              className={`app-nav-btn ${tela === 'setores' ? 'active' : ''}`}
+            >
+              Setores
+            </button>
+          </nav>
+        )}
 
-          <span style={{ fontSize: '13px', marginLeft: '8px' }}>{user.email}</span>
-
-          <button
-            onClick={handleLogout}
-            style={{
-              background: 'rgba(255,255,255,0.2)',
-              border: 'none',
-              color: 'white',
-              padding: '8px 14px',
-              borderRadius: '6px',
-              cursor: 'pointer',
-              fontSize: '13px'
-            }}
-          >
+        {/* Informações do Usuário e Logout */}
+        <div className="app-user-section">
+          <span className="app-user-email">{user.email}</span>
+          <button onClick={handleLogout} className="app-logout-btn">
             Sair
           </button>
         </div>
       </header>
 
-      {/* Conteúdo */}
-      <main style={{ padding: '32px 24px', maxWidth: '900px', margin: '0 auto' }}>
+      {/* Conteúdo Principal */}
+      <main className="app-main">
         {tela === 'tarefas' && <TaskList user={user} />}
         {tela === 'funcionarios' && isOwner && (
           <div style={{ display: 'flex', justifyContent: 'center' }}>

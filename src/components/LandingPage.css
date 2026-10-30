@@ -1,0 +1,238 @@
+/* ==========================================================================
+   GreenTask - Simple & Modern Landing Page (Soft green tones + Glassmorphism)
+   ========================================================================== */
+
+.landing-container {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: 
+    radial-gradient(circle at 10% 15%, rgba(167, 243, 208, 0.35) 0%, transparent 40%),
+    radial-gradient(circle at 90% 85%, rgba(110, 231, 183, 0.25) 0%, transparent 45%),
+    linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 50%, #f4fbf7 100%);
+  color: #1e293b;
+  box-sizing: border-box;
+}
+
+/* Navbar */
+.landing-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 28px;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.03);
+}
+
+.landing-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.landing-brand-icon {
+  width: 36px;
+  height: 36px;
+  background: rgba(240, 253, 244, 0.9);
+  border: 1px solid #bbf7d0;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.landing-brand-title {
+  font-size: 19px;
+  font-weight: 700;
+  color: #15803d;
+  letter-spacing: -0.3px;
+}
+
+.landing-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.landing-btn-login {
+  background: #16a34a;
+  color: #ffffff;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 0 2px 8px rgba(22, 163, 74, 0.2);
+}
+
+.landing-btn-login:hover {
+  background: #15803d;
+  transform: translateY(-1px);
+}
+
+/* Hero Section */
+.landing-hero {
+  flex: 1;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 60px 24px 40px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.landing-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid #bbf7d0;
+  color: #15803d;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 5px 14px;
+  border-radius: 20px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 6px rgba(22, 163, 74, 0.06);
+}
+
+.landing-title {
+  font-size: 42px;
+  line-height: 1.2;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -1px;
+  max-width: 720px;
+  margin-bottom: 18px;
+}
+
+.landing-title span {
+  color: #16a34a;
+}
+
+.landing-subtitle {
+  font-size: 17px;
+  line-height: 1.6;
+  color: #475569;
+  max-width: 620px;
+  margin-bottom: 32px;
+}
+
+.landing-hero-actions {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 50px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.landing-btn-primary {
+  background: #16a34a;
+  color: #ffffff;
+  border: none;
+  padding: 13px 28px;
+  border-radius: 9px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.15s ease;
+  box-shadow: 0 4px 14px rgba(22, 163, 74, 0.25);
+}
+
+.landing-btn-primary:hover {
+  background: #15803d;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(22, 163, 74, 0.3);
+}
+
+/* Features Cards with Glassmorphism */
+.landing-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  width: 100%;
+  max-width: 900px;
+  margin-top: 20px;
+}
+
+.landing-card {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 14px;
+  padding: 24px;
+  text-align: left;
+  box-shadow: 0 4px 20px rgba(16, 185, 129, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.landing-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.1);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.landing-card-icon {
+  width: 42px;
+  height: 42px;
+  background: #ecfdf5;
+  border: 1px solid #d1fae5;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  color: #16a34a;
+}
+
+.landing-card-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 8px;
+}
+
+.landing-card-desc {
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: #64748b;
+  margin: 0;
+}
+
+/* Footer */
+.landing-footer {
+  padding: 24px;
+  text-align: center;
+  font-size: 13px;
+  color: #64748b;
+  border-top: 1px solid rgba(22, 163, 74, 0.1);
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(8px);
+}
+
+@media (max-width: 640px) {
+  .landing-title {
+    font-size: 30px;
+  }
+  .landing-subtitle {
+    font-size: 15px;
+  }
+  .landing-hero {
+    padding: 40px 16px 30px;
+  }
+}
